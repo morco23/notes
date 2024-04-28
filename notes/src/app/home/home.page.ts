@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Note } from './types/note-data';
+import { ModalController } from '@ionic/angular';
+import { NoteEditComponent } from './note-edit/note-edit.component';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,13 @@ export class HomePage {
     }
   ]
   
-  constructor() {
+  constructor(private modalCtrl: ModalController) {
+  }
+
+  protected async addNewNote() {
+    const modal = await this.modalCtrl.create({
+      component: NoteEditComponent,
+    });
+    modal.present();
   }
 }

@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { NoteComponent } from './note/note.component';
+import { NoteEditComponent } from './note-edit/note-edit.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NoteComponent } from './note/note.component';
   ],
   declarations: [
     HomePage,
-    NoteComponent
+    NoteComponent,
+    NoteEditComponent
   ]
 })
 export class HomePageModule {}

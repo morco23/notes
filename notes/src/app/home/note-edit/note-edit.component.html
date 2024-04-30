@@ -1,12 +1,17 @@
 <ion-list [inset]="true">
   <ion-item [button]="true">
-    <ion-input label="Title"></ion-input>
+    <ion-input label="Title"
+               required="true"
+               [(ngModel)]="note.title">
+  </ion-input>
   </ion-item>
   <ion-item [button]="true">
     <ion-textarea rows="20"
                   class="note-content" 
                   label="Content" 
-                  placeholder="Note content">
+                  placeholder="Note content"
+                  required="true"
+                  [(ngModel)]="note.content">
     </ion-textarea>
   </ion-item>
 </ion-list>
@@ -14,7 +19,9 @@
   <ion-button style="margin: auto; margin-bottom: 20px;" 
               size="default" 
               shape="round" 
-              color="primary">
+              color="primary"
+              [disabled]="!note.title?.length || !note?.content?.length"
+              (click)="saveNote()">
               Save
   </ion-button>
 </ion-item>

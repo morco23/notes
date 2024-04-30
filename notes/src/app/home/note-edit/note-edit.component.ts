@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NotesService } from 'src/app/services/notes.service';
+import { Note } from '../types/note-data';
 
 @Component({
   selector: 'app-note-edit',
@@ -6,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./note-edit.component.scss'],
 })
 export class NoteEditComponent  implements OnInit {
+  @Input()
+  public note!: Note;
+  
+  constructor(private notesService: NotesService) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.note = { title: "", content: "" };
+  }
 
-  ngOnInit() {}
-
+  protected saveNote() {
+    this.notesService.saveNote(this.note);
+  }
 }

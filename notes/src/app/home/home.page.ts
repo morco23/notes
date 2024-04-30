@@ -1,24 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Note } from './types/note-data';
 import { ModalController } from '@ionic/angular';
 import { NoteEditComponent } from './note-edit/note-edit.component';
+import { NotesService } from '../services/notes.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  public noteList: Note[] = [
-    {
-      title: "Title placeholder",
-      content: "Content placeholder blalala"
-    }
-  ]
+export class HomePage implements OnInit {
+  public notes: Note[] = [];
   
-  constructor(private modalCtrl: ModalController) {
+  constructor(private modalCtrl: ModalController,
+              private notesService: NotesService
+  ) {
   }
 
+  ngOnInit(): void {
+    this.notesService.getNotesObservable().subscribe(notes => this.notes = notes);
+  }
+  
   protected async addNewNote() {
     const modal = await this.modalCtrl.create({
       component: NoteEditComponent,

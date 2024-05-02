@@ -1,3 +1,4 @@
+
 <ion-list [inset]="true">
   <ion-item [button]="true">
     <ion-input label="Title"
@@ -16,12 +17,21 @@
   </ion-item>
 </ion-list>
 <ion-item>
-  <ion-button style="margin: auto; margin-bottom: 20px;" 
+  <ion-button style="margin-left: auto; margin-bottom: 20px;" 
+              class="save_btn"
               size="default" 
               shape="round" 
               color="primary"
-              [disabled]="!note.title?.length || !note?.content?.length"
+              [disabled]="!note.title.length || !note.content.length"
               (click)="saveNote()">
               Save
   </ion-button>
+  <ion-button style="margin-right: auto; margin-bottom: 20px; margin-left:10px" 
+              class="cancel_btn"
+              size="default" 
+              shape="round" 
+              color="light"
+              (click)="cancel()">
+              Cancel
+</ion-button>
 </ion-item>

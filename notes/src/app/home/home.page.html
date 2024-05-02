@@ -14,7 +14,7 @@
   </ion-header>
   <div class="notes-container">
     <ng-container *ngFor="let note of notes">
-      <note [note]="note"></note>
+      <note [note]="note" (click)="editNote(note)"></note>
     </ng-container>
   </div>
 </ion-content>

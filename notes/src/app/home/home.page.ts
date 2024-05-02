@@ -21,9 +21,18 @@ export class HomePage implements OnInit {
     this.notesService.getNotesObservable().subscribe(notes => this.notes = notes);
   }
   
-  protected async addNewNote() {
+  protected addNewNote() {
+    return this.openEditNoteModal();
+  }
+
+  protected editNote(note: Note) {
+    return this.openEditNoteModal(note);
+  }
+
+  protected async openEditNoteModal(note: Note | null = null) {
     const modal = await this.modalCtrl.create({
       component: NoteEditComponent,
+      componentProps: { note: note }
     });
     modal.present();
   }

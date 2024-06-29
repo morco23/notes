@@ -11,11 +11,12 @@ import { BehaviorSubject } from 'rxjs';
 describe('NoteEditComponent', () => {
   let component: NoteEditComponent;
   let fixture: ComponentFixture<NoteEditComponent>;
-  const noteServiceMock: jasmine.SpyObj<NotesService> = jasmine.createSpyObj('NoteService', ['saveNote']);
+  const noteServiceMock: jasmine.SpyObj<NotesService> = jasmine.createSpyObj('NoteService', ['saveNote', 'deleteNote']);
   const modalControllerMock: jasmine.SpyObj<ModalController> = jasmine.createSpyObj('NoteService', ['dismiss']);
 
   const NOTE_TITLE = "note_title";
   const NOTE_CONTENT = "note_content";
+  const NOTE_ID = "note_id";
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -68,5 +69,27 @@ describe('NoteEditComponent', () => {
     expect(cancelBtn).toBeTruthy();
 
     cancelBtn.nativeElement.click();
-  })
+  });
+
+  it('should delete a note when clicking on the delete button', (done: DoneFn) => {
+    component.note = { noteId: NOTE_ID, title: NOTE_TITLE, content: NOTE_CONTENT };
+
+    noteServiceMock.deleteNote.and.callFake((noteId) => {
+      expect(noteId).toBe(NOTE_ID);
+      return Promise.resolve();
+    })
+
+    modalControllerMock.dismiss.and.callFake(() => {
+      done();
+      return Promise.resolve(true);
+    })
+
+    const cancelBtn = fixture.debugElement.query(By.css('.delete_btn'));
+    expect(cancelBtn).toBeTruthy();
+
+    cancelBtn.nativeElement.click();
+  });
+
+  
+    
 });

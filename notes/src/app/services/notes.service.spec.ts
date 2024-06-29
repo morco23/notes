@@ -56,10 +56,10 @@ describe('NotesService', () => {
     service.saveNote(note);
   });
 
-  it('should remove a note and get updated notes list', async () => {
+  it('should delete a note and get updated notes list', async () => {
     const noteToSave: Note = {title: NOTE_TITLE, content: NOTE_CONTENT};
     await service.saveNote(noteToSave);
-    await service.removeNote(noteToSave.noteId as string);
+    await service.deleteNote(noteToSave.noteId as string);
     
     const notesAfterRemoving = await firstValueFrom(service.getNotesObservable());
     expect(notesAfterRemoving).toHaveSize(0);

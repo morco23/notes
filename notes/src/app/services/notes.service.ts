@@ -37,10 +37,11 @@ export class NotesService {
     this.notesSubject.next(notes);
   }
 
-  /** Remove note by its id. */
-  public async removeNote(noteId: string) {
+  /** Delete note by its id. */
+  public async deleteNote(noteId: string) {
     const notes = this.notesSubject.value;
-    notes.splice(notes.findIndex(n => n.noteId == noteId));
+    notes.splice(notes.findIndex(n => n.noteId == noteId), 1);
+    this.appStorage.set(NotesService.STORAGE_KEY, notes);
     this.notesSubject.next(notes);
   }
 

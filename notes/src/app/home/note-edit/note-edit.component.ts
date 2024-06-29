@@ -34,4 +34,9 @@ export class NoteEditComponent implements OnInit {
   protected async cancel() {
     await this.modalCtrl.dismiss();
   }
+
+  protected async delete() {
+    await this.notesService.deleteNote(this.note.noteId as string);
+    await this.modalCtrl.dismiss();
+  }
 }

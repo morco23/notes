@@ -1,0 +1,30 @@
+<div class="login-container">
+  <app-sign-in 
+    *ngIf="showSignIn">
+  </app-sign-in>
+
+  <app-sign-up 
+    *ngIf="!showSignIn">
+  </app-sign-up>
+
+  <div class="login-switch"> 
+    {{ switchQuesion }}
+    <span (click)="switch()" 
+          class="login-switch-link">
+      {{ switchLink }}
+    </span>
+  </div>
+
+  <div class="other-login-options-row">
+    <span class="line"></span>
+    <span class="other-login-options-text"> 
+      Other login options
+    </span>
+    <span class="line"></span>
+  </div>
+
+  <div class="federated-login">
+    <span><img src="../../assets/facebook-logo.jpg"/></span>
+    <span><img src="../../assets/google-logo.jpg"/></span>
+  </div>
+</div>
